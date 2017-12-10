@@ -28,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.QuadCurveTo;
 import javafx.util.Duration;
 import pkgCore.Action;
 import pkgCore.GamePlay;
@@ -54,7 +55,7 @@ public class BlackJackController implements Initializable {
 	@FXML
 	private Label lblNameP1;
 
-	private int iAnimationLength = 250;
+	private int iAnimationLength = 750; //edit time
 
 	private int iDrawCardP1 = 0;
 	private int iDrawCardP2 = 0;
@@ -287,15 +288,12 @@ public class BlackJackController implements Initializable {
 
 	private PathTransition CreatePathTransition(Point2D fromPoint, Point2D toPoint, ImageView img) {
 		Path path = new Path();
-		
-		//TODO: Fix the Path transition.  My Path looks terrible...  do something cool :)
-		
+		//quad curve addition
 		path.getElements().add(new MoveTo(fromPoint.getX(), fromPoint.getY()));
-		path.getElements().add(new CubicCurveTo(toPoint.getX() * 2, toPoint.getY() * 2, toPoint.getX() / 3,
-				toPoint.getY() / 3, toPoint.getX(), toPoint.getY()));
-		// path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
+		//remove cubic curve
+		path.getElements().add( new QuadCurveTo(250, 250, toPoint.getX()/2, toPoint.getY()/2));
 		PathTransition pathTransition = new PathTransition();
-		pathTransition.setDuration(Duration.millis(750));
+		pathTransition.setDuration(Duration.millis(1500)); //extend move time (dramatic!)
 		pathTransition.setPath(path);
 		pathTransition.setNode(img);
 		pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
@@ -308,8 +306,8 @@ public class BlackJackController implements Initializable {
 
 	private ScaleTransition CreateScaleTransition(ImageView img) {
 		ScaleTransition st = new ScaleTransition(Duration.millis(iAnimationLength), img);
-		st.setByX(.25f);
-		st.setByY(.25f);
+		st.setByX(2f); //edit
+		st.setByY(2f); //edit
 		st.setCycleCount((int) 1f);
 		st.setAutoReverse(true);
 
