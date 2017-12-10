@@ -86,7 +86,6 @@ public class BlackJackController implements Initializable {
 			break;
 		}
 
-
 		SequentialTransition seqDealTable = new SequentialTransition();
 		
 		
@@ -100,8 +99,6 @@ public class BlackJackController implements Initializable {
 		pntCardDealt = FindPoint(getCardHBox(iPosition), iDrawCard);
 
 		Point2D pntDeck = FindPoint(hBoxDeck, 0);
-		
-		
 		
 		//	Create a brand animation new image, drop it on the main screen.  The new image will be:
 		//		* created
@@ -169,8 +166,6 @@ public class BlackJackController implements Initializable {
 		}
 
 	}
-
-
 
 	@FXML
 	public void btnStand_Click(ActionEvent event) {
